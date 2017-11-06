@@ -7,11 +7,26 @@ import {
 import MoodButton from './MoodButton';
 
 export default class MoodBar extends Component<{}> {
+  _getStyles(id){
+    if (this.props.mood === id) {
+      console.log(`${this.props.mood} === ${id}`)
+      return styles.selected
+    } else {
+      console.log(`${this.props.mood} !== ${id}`)
+      return styles.unselected
+    }
+  }
+
   render() {
-    let moodData = ['mood1', 'mood2', 'mood3']
-    let moodButtons = moodData.map((e, index) => {
+    let moodData = [{title:'mood1', id: 1}, {title: 'mood2', id: 2}, {title: 'mood3', id: 3}]
+    let moodButtons = moodData.map((moodObject, index) => {
       return(
-        <MoodButton key={index} title={e}/>
+        <MoodButton
+        isSelected={this.props.mood === moodObject.id}
+        key={index} title={moodObject.title}
+        handlePressMood={this.props.handlePressMood}
+        id={moodObject.id}
+        />
       )
     })
     return (
@@ -26,8 +41,9 @@ export default class MoodBar extends Component<{}> {
 
 const styles = StyleSheet.create({
   moodBar: {
+    alignItems: 'center',
+    alignContent: 'space-around',
     flexDirection: 'row',
-    justifyContent: 'space-around',
     flex: 2
-  }
+  },
 });

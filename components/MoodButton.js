@@ -8,8 +8,9 @@ import {
 export default class MoodBar extends Component<{}> {
   render() {
     return (
-      <View style={styles.moodButton}>
+      <View style={this.props.isSelected ? styles.selectedMoodButton : styles.unselectedMoodButton}>
         <Button
+          onPress = {(e) => this.props.handlePressMood(e, this.props.id)}
           title={this.props.title}
         />
       </View>
@@ -18,9 +19,18 @@ export default class MoodBar extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
-  moodButton: {
+  selectedMoodButton: {
+    backgroundColor: 'green',
+    height: 100,
+    width: 100,
+    marginRight: 10,
+    marginLeft: 10
+  },
+  unselectedMoodButton: {
     backgroundColor: 'blue',
     height: 100,
-    width: 100
+    width: 100,
+    marginRight: 10,
+    marginLeft: 10
   }
 });

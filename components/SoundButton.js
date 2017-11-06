@@ -6,6 +6,13 @@ import {
 } from 'react-native';
 
 export default class SoundButton extends Component<{}> {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      selected: null
+    }
+  }
   render() {
     return (
       <View style={styles.soundButton}>
