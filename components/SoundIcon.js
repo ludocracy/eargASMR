@@ -7,7 +7,7 @@ import {
 export default class SoundIcon extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
       </View>
     );
   }

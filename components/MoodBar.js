@@ -3,11 +3,12 @@ import {
   StyleSheet,
   View
 } from 'react-native';
+import MoodIcon from './MoodIcon';
 
 export default class MoodBar extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
+      <View>
       </View>
     );
   }
