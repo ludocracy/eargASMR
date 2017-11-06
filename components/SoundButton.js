@@ -10,7 +10,7 @@ export default class SoundButton extends Component<{}> {
     super(props);
 
     this.state = {
-      selected: null
+      selected: false
     }
   }
   render() {
