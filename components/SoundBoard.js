@@ -4,19 +4,19 @@ import {
   Text,
   View
 } from 'react-native';
-import SoundIcon from './SoundIcon';
+import SoundButton from './SoundButton';
 
 export default class SoundBoard extends Component<{}> {
   render() {
     let soundData = [0,0,0,0,0,0,0,0,0,0,0,0];
-    let soundIcons = soundData.map((e, index) => {
+    let soundButtons = soundData.map((e, index) => {
       return (
-        <SoundIcon key={index} />
+        <SoundButton key={index} />
       )
     })
     return (
       <View style={styles.soundBoard}>
-        {soundIcons}
+        {soundButtons}
       </View>
     );
   }
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red'
   },
   soundBoard: {
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     alignContent: 'space-around',
     flexDirection: 'row',
     flex: 10,

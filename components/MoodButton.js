@@ -5,14 +5,12 @@ import {
   Button
 } from 'react-native';
 
-export default class SoundIcon extends Component<{}> {
+export default class MoodBar extends Component<{}> {
   render() {
     return (
-      <View style={styles.soundButton}>
+      <View style={styles.moodButton}>
         <Button
-          onPress ={() => {}}
-          title='Sound Icon'
-          color="#841584"
+          title={this.props.title}
         />
       </View>
     );
@@ -20,9 +18,9 @@ export default class SoundIcon extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
-  soundButton: {
-    backgroundColor: 'red',
+  moodButton: {
+    backgroundColor: 'blue',
     height: 100,
-    width: 100,
+    width: 100
   }
 });
