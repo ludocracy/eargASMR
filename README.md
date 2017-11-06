@@ -4,8 +4,23 @@ Sprints:
 3. control panel
 4. user
 5. search
-6. user customizations
+6. user customizations - mood icons and adding sounds to categories
 7. gestures
+8. audio randomization
+
+Sounds:
+- Fire
+- Bells
+- Rain
+- Whispers
+- Rustling paper
+- Rustling leaves
+- Walking
+- Birds
+- Whales
+- Wind
+- Waves
+- Crickets/cicadas
 
 Empathy map notes:
 Tasks
