@@ -17,7 +17,7 @@ export default class MoodBar extends Component<{}> {
         <Image
           style={{height: 100, width: 100}}
           onPress = {(e) => this.props.handlePressMood(e, this.props.mood)}
-          source={require('../images/icons/add-mood.png')}
+          source={require('../assets/img/add-mood.png')}
         />
       </TouchableOpacity>
     );

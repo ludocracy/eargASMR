@@ -9,7 +9,7 @@ import jsonSoundData from '../sounds.json';
 
 export default class SoundBoard extends Component<{}> {
   _isInMood(sound) {
-    return this.props.mood.sounds.find(s => s.title === sound.title) !== undefined
+    return this.props.mood.sounds.find(s => s.title === sound.title) !== undefined;
   }
 
   render() {

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Sound from 'react-native-sound';
 import { database } from '../utils/firebase';
+import images from '@assets/images';
 
 export default class SoundButton extends Component<{}> {
   constructor(props){
@@ -58,7 +59,7 @@ export default class SoundButton extends Component<{}> {
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
         <Image
           style={styles.soundIcon}
-          source={require("../images/icons/cricket.png")}
+          source={images[this.props.sound.iconKey]}
         />
         </TouchableOpacity>
     );
