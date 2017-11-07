@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 export default class MoodBar extends Component<{}> {
   render() {
     return (
-      <View style={this.props.isSelected ? styles.selectedMoodButton : styles.unselectedMoodButton}>
-        <Button
+      <TouchableOpacity style={this.props.isSelected ? styles.selectedMoodButton: styles.unselectedMoodButton}>
+        <Image
           style={{height: 100, width: 100}}
           onPress = {(e) => this.props.handlePressMood(e, this.props.id)}
-          title={this.props.title}
+          source={require('../images/icons/add-mood.png')}
         />
-      </View>
+      </TouchableOpacity>
     );
   }
 }
@@ -28,7 +29,6 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   unselectedMoodButton: {
-    backgroundColor: 'blue',
     height: 100,
     width: 100,
     marginRight: 10,

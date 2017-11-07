@@ -15,7 +15,7 @@ export default class App extends Component<{}> {
 
     this.state = {
       mood: 'heeeey',
-      isPlaying: false
+      isPlaying: false,
     }
     this._handlePressMood = this._handlePressMood.bind(this)
   }

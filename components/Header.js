@@ -9,7 +9,7 @@ import {
 export default class Header extends Component<{}> {
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: 'powderblue', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+      <View style={{flex: 1, backgroundColor: '#DDBEA2', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
         <Image source={{uri: 'https://d30y9cdsu7xlg0.cloudfront.net/png/105498-200.png'}}
           style={{width: 40, height: 40}} />
         <Text style={{ fontFamily: 'HelveticaNeue-CondensedBold', fontSize: 30 }}>

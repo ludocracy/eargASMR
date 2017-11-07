@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button
+  Button,
+  TouchableOpacity,
+  Image
 } from 'react-native';
-import Sound from 'react-native-sound'
+import Sound from 'react-native-sound';
 
 export default class SoundButton extends Component<{}> {
   constructor(props){
     super(props);
 
     this.state = {
-      isPlaying: false
+      isPlaying: false,
+      icon: []
     }
 
     this.sound = new Sound('https://www.memoclic.com/medias/sons-wav/2/705.wav');
@@ -33,22 +36,35 @@ export default class SoundButton extends Component<{}> {
   }
 
   render() {
+    let icon = [
+      '../images/icons/bug.png',
+      '../images/icons/beach.png',
+      '../images/icons/bell.png',
+      '../images/icons/bird.png',
+      '../images/icons/bonfire.png',
+      '../images/icons/cicada.png',
+      '../images/icons/waves.png',
+      '../images/icons/wind-rain.png'
+    ]
     return (
-      <View style={styles.soundButton}>
-        <Button
-          onPress ={this._onPress}
-          title='Sound Button'
-          color="#841584"
+        <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
+        <Image
+          style={styles.soundIcon}
+          source={require('../images/icons/wind-rain.png')}
         />
-      </View>
+        </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
   soundButton: {
-    backgroundColor: 'red',
-    height: 100,
-    width: 100,
+    height: 90,
+    width: 110,
+  },
+  soundIcon: {
+    width: 110,
+    height: 90,
   }
+
 });

@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'space-around',
     flexDirection: 'row',
-    flex: 2,
-    backgroundColor: 'orange'
+    backgroundColor: 'white',
   },
 });
