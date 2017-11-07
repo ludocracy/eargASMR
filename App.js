@@ -14,23 +14,25 @@ export default class App extends Component<{}> {
     super(props);
 
     this.state = {
-      mood: 'heeeey',
+      mood: null,
       isPlaying: false
-    }
-    this._handlePressMood = this._handlePressMood.bind(this)
+    };
+    
+    this._handlePressMood = this._handlePressMood.bind(this);
   }
 
-  _handlePressMood(e, id){
+  _handlePressMood(e, mood){
     this.setState({
-      mood: id,
+      mood: mood,
       isPlaying: !this.state.isPlaying
-    })
+    });
   }
+
   render() {
     return (
       <View style={{flex: 1, paddingTop: 20}}>
         <Header />
-        <MoodBar handlePressMood={this._handlePressMood} mood={this.state.mood}/>
+        <MoodBar _handlePressMood={this._handlePressMood} mood={this.state.mood}/>
         <SoundBoard mood={this.state.mood} isPlaying={this.state.isPlaying}/>
         <ControlPanel />
       </View>

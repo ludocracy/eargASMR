@@ -7,12 +7,16 @@ import {
 
 export default class MoodBar extends Component<{}> {
   render() {
+    let styling = this.props.isSelected
+      ? styles.selectedMoodButton
+      : styles.unselectedMoodButton;
+      
     return (
-      <View style={this.props.isSelected ? styles.selectedMoodButton : styles.unselectedMoodButton}>
+      <View style={styling}>
         <Button
           style={{height: 100, width: 100}}
-          onPress = {(e) => this.props.handlePressMood(e, this.props.id)}
-          title={this.props.title}
+          onPress = {e => this.props._handlePressMood(e, this.props.mood)}
+          title={this.props.mood.title}
         />
       </View>
     );
