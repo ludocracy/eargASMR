@@ -1,0 +1,49 @@
+{
+  "sounds": [
+    {
+      "title": "Fire",
+      "soundUrl": "https://freesound.org/data/previews/186/186316_2421128-lq.mp3",
+      "iconUrl": "../images/icons/bonfire.png",
+    },
+    {
+      "title": "Rain",
+      "soundUrl": "https://freesound.org/data/previews/252/252804_4388723-lq.mp3",
+      "iconUrl": "../images/icons/wind-rain.png",
+    },
+    {
+      "title": "Crickets",
+      "soundUrl": "https://freesound.org/data/previews/177/177687_612689-lq.mp3",
+      "iconUrl": "../images/icons/cricket.png",
+    },
+    {
+      "title": "Birds",
+      "soundUrl": "https://freesound.org//data/previews/274/274175_1196472-lq.mp3",
+      "iconUrl": "../images/icons/bird.png",
+    },
+    {
+      "title": "Bells",
+      "soundUrl": "https://freesound.org//data/previews/365/365416_179538-lq.mp3",
+      "iconUrl": "../images/icons/bell.png",
+    },
+    {
+      "title": "Waves",
+      "soundUrl": "https://freesound.org/data/previews/400/400632_5121236-lq.mp3",
+      "iconUrl": ".../images/icons/waves.png",
+    },
+    {
+      "title": "Cicadas",
+      "soundUrl": "https://freesound.org/data/previews/400/400331_5121236-lq.mp3",
+      "iconUrl": "../images/icons/cicada.png",
+    },
+    {
+      "title": "Leaves",
+      "soundUrl": "https://freesound.org//data/previews/330/330647_3163726-lq.mp3",
+      "iconUrl": "../images/icons/leaves.png",
+    },
+    {
+      "title": "Night Time",
+      "soundUrl": "https://freesound.org//data/previews/62/62488_43834-lq.mp3",
+      "iconUrl": "../images/icons/night.png",
+    },
+  ]
+}
