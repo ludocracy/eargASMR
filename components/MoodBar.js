@@ -40,7 +40,6 @@ export default class MoodBar extends Component<{}> {
   }
 
   render() {
-    console.warn(this.state.moods)
     let moodButtons = this.state.moods.map(moodObject => {
       return(
         <MoodButton

@@ -18,15 +18,20 @@ export default class SoundButton extends Component<{}> {
     this._onPress = this._onPress.bind(this);
   }
 
-  componentDidMount() {
-    let sound = this.props.sound;
-    this.player = new Sound(sound.soundURL);
+  componentWillMount() {
+    this.player = new Sound(this.props.sound.soundUrl, this._onError);
   }
 
+  // TODO handle errors on loading sound player
+  _onError() {
+
+  }
+
+  // TODO check if mood is active; if not, set it to be active
   _onPress(e) {
     if(this.state.isPlaying) {
       let newSounds = this.props.mood.sounds
-        .filter(sound => sound.id !== this.props.sound.id);
+        .filter(sound => sound.title !== this.props.sound.title);
       database.ref(`moods/${this.props.mood.id}`).set({
         sounds: newSounds
       });

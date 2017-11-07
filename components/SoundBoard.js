@@ -5,38 +5,18 @@ import {
 } from 'react-native';
 import SoundButton from './SoundButton';
 import { database, firebaseListToArray} from '../utils/firebase';
+import jsonSoundData from '../sounds.json';
 
 export default class SoundBoard extends Component<{}> {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      sounds: []
-    }
-  }
-
-  componentDidMount() {
-    this.ref = database.ref('sounds');
-    this.ref.on('value', snapshot => {
-      this.setState({
-        sounds: firebaseListToArray(snapshot.val())
-      });
-    });
-  }
-
-  componentWillUnmount() {
-    this.ref.off();
-  }
-
   _isInMood(sound) {
-    return this.props.mood.sounds.find(s => s.id === sound.id) !== undefined
+    return this.props.mood.sounds.find(s => s.title === sound.title) !== undefined
   }
 
   render() {
-    let soundButtons = this.state.sounds.map(soundData => {
+    let soundButtons = jsonSoundData.sounds.map(soundData => {
       let isPlaying = this.props.isPlaying ? this._isInMood(soundData) : false;
       return (
-        <SoundButton key={soundData.id} isPlaying={isPlaying} sound={soundData} mood={this.props.mood} />
+        <SoundButton key={soundData.title} isPlaying={isPlaying} sound={soundData} mood={this.props.mood} />
       );
     });
     return (
