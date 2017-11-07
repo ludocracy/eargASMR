@@ -28,7 +28,7 @@
     {
       "title": "Waves",
       "soundUrl": "https://freesound.org/data/previews/400/400632_5121236-lq.mp3",
-      "iconUrl": ".../images/icons/waves.png",
+      "iconUrl": "../images/icons/waves.png",
     },
     {
       "title": "Cicadas",

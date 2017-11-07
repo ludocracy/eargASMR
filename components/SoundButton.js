@@ -53,11 +53,12 @@ export default class SoundButton extends Component<{}> {
   }
 // TODO use this.props.sound.title and this.props.sound.iconUrl
   render() {
+    console.warn(typeof this.props.sound.iconUrl)
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
         <Image
           style={styles.soundIcon}
-          source={this.props.icon}
+          source={require("../images/icons/cricket.png")}
         />
         </TouchableOpacity>
     );
