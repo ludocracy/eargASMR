@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View
 } from 'react-native';
 import SoundButton from './SoundButton';
+import { database, firebaseListToArray} from '../utils/firebase';
+import jsonSoundData from '../sounds.json';
 
 export default class SoundBoard extends Component<{}> {
+  _isInMood(sound) {
+    return this.props.mood.sounds.find(s => s.title === sound.title) !== undefined
+  }
+
   render() {
-    let soundData = [0,0,0,0,0,0,0,0,0,0,0,0];
-    let icon = [
-      '../images/icons/bug.png',
-      '../images/icons/beach.png',
-      '../images/icons/bell.png',
-      '../images/icons/bird.png',
-      '../images/icons/bonfire.png',
-      '../images/icons/cicada.png',
-      '../images/icons/waves.png',
-      '../images/icons/wind-rain.png'
-    ]
-    let soundButtons = soundData.map((e, index) => {
+    let soundButtons = jsonSoundData.sounds.map(soundData => {
+      let isPlaying = this.props.isPlaying ? this._isInMood(soundData) : false;
       return (
-        <SoundButton source={require(icon)} key={index} />
-      )
-    })
+        <SoundButton key={soundData.title} isPlaying={isPlaying} sound={soundData} mood={this.props.mood} />
+      );
+    });
     return (
       <View style={styles.soundBoard}>
         {soundButtons}

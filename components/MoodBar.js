@@ -5,30 +5,52 @@ import {
   ScrollView
 } from 'react-native';
 import MoodButton from './MoodButton';
+import { database, firebaseListToArray } from '../utils/firebase';
 
 export default class MoodBar extends Component<{}> {
-  _getStyles(id){
-    if (this.props.mood === id) {
-      console.log(`${this.props.mood} === ${id}`)
-      return styles.selected
-    } else {
-      console.log(`${this.props.mood} !== ${id}`)
-      return styles.unselected
-    }
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      moods: []
+    };
+  }
+
+  componentDidMount() {
+    this.ref = database.ref('moods');
+    this.ref.on('value', snapshot => {
+      let moodAry = firebaseListToArray(snapshot.val());
+      // creates an empty mood if one does not exist
+      if(moodAry.length === 0) {
+        let pushRef = this.ref.push();
+        pushRef.set({
+          title: 'name this mood',
+          songs: []
+        });
+      }
+
+      this.setState({
+        moods: moodAry
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    this.ref.off();
   }
 
   render() {
-    let moodData = [{title:'mood1', id: 1}, {title: 'mood2', id: 2}, {title: 'mood3', id: 3}]
-    let moodButtons = moodData.map((moodObject, index) => {
+    let moodButtons = this.state.moods.map(moodObject => {
       return(
         <MoodButton
-        isSelected={this.props.mood === moodObject.id}
-        key={index} title={moodObject.title}
-        handlePressMood={this.props.handlePressMood}
-        id={moodObject.id}
+        isPlaying={this.props.mood && this.props.mood.id === moodObject.id}
+        key={moodObject.id}
+        _handlePressMood={this.props._handlePressMood}
+        mood={moodObject}
         />
-      )
-    })
+      );
+    });
+
     return (
       <ScrollView horizontal={true}>
         <View style={styles.moodBar}>
