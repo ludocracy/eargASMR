@@ -17,7 +17,7 @@ export default class MoodBar extends Component<{}> {
   }
 
   componentDidMount() {
-    this.refs = database.refs('moods/');
+    this.refs = database.refs('moods');
     this.refs.on('value', snapshot => {
       let moodAry = firebaseListToArray(snapshot);
       // creates an empty mood if one does not exist
