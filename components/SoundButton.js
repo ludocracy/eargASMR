@@ -12,20 +12,15 @@ export default class SoundButton extends Component<{}> {
     super(props);
 
     this.state = {
-      isPlaying: false
-    }
-
-    this.player = new Sound('https://www.memoclic.com/medias/sons-wav/2/705.wav');
+      isPlaying: this.props.isPlaying
+    };
 
     this._onPress = this._onPress.bind(this);
   }
 
   componentDidMount() {
-    // TODO assign db ref to this.refs
-  }
-
-  componentWillUnmount() {
-    // TODO close db connections
+    let sound = this.props.sound;
+    this.player = new Sound(sound.soundURL);
   }
 
   _onPress(e) {
@@ -49,7 +44,7 @@ export default class SoundButton extends Component<{}> {
       isPlaying: !this.state.isPlaying
     });
   }
-
+// TODO use this.props.sound.title and this.props.sound.iconUrl
   render() {
     return (
       <View style={styles.soundButton}>

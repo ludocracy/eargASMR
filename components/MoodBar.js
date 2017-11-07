@@ -17,14 +17,14 @@ export default class MoodBar extends Component<{}> {
   }
 
   componentDidMount() {
-    this.refs = database.refs('moods');
-    this.refs.on('value', snapshot => {
-      let moodAry = firebaseListToArray(snapshot);
+    this.ref = database.ref('moods');
+    this.ref.on('value', snapshot => {
+      let moodAry = firebaseListToArray(snapshot.val());
       // creates an empty mood if one does not exist
-      // TODO check if it triggers recursively at least once on empty db!
-      if(moodAry.length === 0) { // TODO evaluate whether we need this later!
-        this.refs.push({
-          title: '',
+      if(moodAry.length === 0) {
+        let pushRef = this.ref.push();
+        pushRef.set({
+          title: 'name this mood',
           songs: []
         });
       }
@@ -36,20 +36,22 @@ export default class MoodBar extends Component<{}> {
   }
 
   componentWillUnmount() {
-    this.refs.off();
+    this.ref.off();
   }
 
   render() {
+    console.warn(this.state.moods)
     let moodButtons = this.state.moods.map(moodObject => {
       return(
         <MoodButton
-        isSelected={this.props.mood.id === moodObject.id}
+        isPlaying={this.props.mood && this.props.mood.id === moodObject.id}
         key={moodObject.id}
         _handlePressMood={this.props._handlePressMood}
         mood={moodObject}
         />
-      )
-    })
+      );
+    });
+
     return (
       <ScrollView horizontal={true}>
         <View style={styles.moodBar}>

@@ -7,10 +7,10 @@ import {
 
 export default class MoodBar extends Component<{}> {
   render() {
-    let styling = this.props.isSelected
+    let styling = this.props.isPlaying
       ? styles.selectedMoodButton
       : styles.unselectedMoodButton;
-      
+
     return (
       <View style={styling}>
         <Button
