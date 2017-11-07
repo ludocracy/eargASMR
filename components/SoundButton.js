@@ -36,21 +36,11 @@ export default class SoundButton extends Component<{}> {
   }
 
   render() {
-    let icon = [
-      '../images/icons/bug.png',
-      '../images/icons/beach.png',
-      '../images/icons/bell.png',
-      '../images/icons/bird.png',
-      '../images/icons/bonfire.png',
-      '../images/icons/cicada.png',
-      '../images/icons/waves.png',
-      '../images/icons/wind-rain.png'
-    ]
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
         <Image
           style={styles.soundIcon}
-          source={require('../images/icons/wind-rain.png')}
+          source={this.props.icon}
         />
         </TouchableOpacity>
     );
