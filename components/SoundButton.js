@@ -30,24 +30,26 @@ export default class SoundButton extends Component<{}> {
 
   }
 
-  // TODO check if mood is active; if not, set it to be active
   _onPress(e) {
     if(this.state.isPlaying) {
+      console.warn(`sound ${this.props.sound.title} is playing; now pausing!`);
       let newSounds = this.props.mood.sounds
         .filter(sound => sound && sound.title !== this.props.sound.title);
-      database.ref(`moods/${this.props.mood.id}`).set({
+      database.ref(`moods/${this.props.mood.id}`).update({
         sounds: newSounds
       });
 
       this.player.pause();
     } else {
+      console.warn(`sound ${this.props.sound.title} is paused; now playing!`);
       let soundArray = this.props.mood.sounds;
       if (soundArray === undefined) {
         soundArray = []
       }
-      database.ref(`moods/${this.props.mood.id}`).set({
+      database.ref(`moods/${this.props.mood.id}`).update({
         sounds: soundArray.concat(this.props.sound)
       });
+
 
       this.player.play();
       this.player.setNumberOfLoops(-1);

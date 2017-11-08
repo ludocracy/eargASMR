@@ -16,7 +16,7 @@ export default class App extends Component<{}> {
 
     this.state = {
       mood: null,
-      isPlaying: false,
+      isPlaying: true,
       isControl: false
     };
 
@@ -26,9 +26,9 @@ export default class App extends Component<{}> {
   // e is null if called explicitly e.g: this._handlePressMood(null, a_mood)
   // however, this method will also be used as an event listener callback where we
   // actually want to change the value of isPlaying
-  _handlePressMood(e, mood){
+  _handlePressMood(e, mood = null){
     this.setState({
-      mood: mood,
+      mood: mood || this.state.mood,
       isPlaying: e ? !this.state.isPlaying : this.state.isPlaying
     });
   }
@@ -42,7 +42,7 @@ export default class App extends Component<{}> {
     if (this.state.mood === null){
       home = <View />;
     }else{
-      home = this.state.isControl ? <ControlPanel mood={this.state.mood}/> : <SoundBoard mood={this.state.mood} isPlaying={this.state.isPlaying}/>;
+      home = this.state.isControl ? <ControlPanel mood={this.state.mood}/> : <SoundBoard mood={this.state.mood} isMoodPlaying={this.state.isPlaying} />;
     }
 
     return (
