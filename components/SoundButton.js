@@ -32,9 +32,6 @@ export default class SoundButton extends Component<{}> {
 
   // TODO check if mood is active; if not, set it to be active
   _onPress(e) {
-    this.player.play();
-    console.warn(this.state.isPlaying)
-    console.warn(this.props.mood.sounds)
     if(this.state.isPlaying) {
       let newSounds = this.props.mood.sounds
         .filter(sound => sound && sound.title !== this.props.sound.title);
@@ -45,8 +42,12 @@ export default class SoundButton extends Component<{}> {
       this.player.pause();
     } else {
       console.warn(this.props.mood)
+      let soundArray = this.props.mood.sounds;
+      if (soundArray === undefined) {
+        soundArray = []
+      }
       database.ref(`moods/${this.props.mood.id}`).set({
-        sounds: this.props.mood.sounds.concat(this.props.sound)
+        sounds: soundArray.concat(this.props.sound)
       });
 
       this.player.play();
