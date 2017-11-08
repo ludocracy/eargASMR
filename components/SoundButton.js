@@ -41,7 +41,6 @@ export default class SoundButton extends Component<{}> {
 
       this.player.pause();
     } else {
-      console.warn(this.props.mood)
       let soundArray = this.props.mood.sounds;
       if (soundArray === undefined) {
         soundArray = []

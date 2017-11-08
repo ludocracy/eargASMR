@@ -13,7 +13,7 @@ export default class MoodBar extends Component<{}> {
       : styles.unselectedMoodButton;
 
     return (
-      <TouchableOpacity style={this.props.isSelected ? styles.selectedMoodButton: styles.unselectedMoodButton}>
+      <TouchableOpacity style={styling}>
         <Image
           style={{height: 100, width: 100}}
           onPress = {(e) => this.props.handlePressMood(e, this.props.mood)}
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     marginRight: 10,
-    marginLeft: 10
+    marginLeft: 10,
+    backgroundColor: 'red'
   }
 });

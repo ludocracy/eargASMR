@@ -29,11 +29,11 @@ export default class MoodBar extends Component<{}> {
         });
       } else {
         this.props._handlePressMood(null, moodAry[0]);
+        
+        this.setState({
+          moods: moodAry
+        });
       }
-
-      this.setState({
-        moods: moodAry
-      });
     });
   }
 
