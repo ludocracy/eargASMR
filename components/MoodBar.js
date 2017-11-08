@@ -27,6 +27,8 @@ export default class MoodBar extends Component<{}> {
           title: 'name this mood',
           songs: []
         });
+
+        this.props._handlePressMood(null, pushRef.val())
       }
 
       this.setState({

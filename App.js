@@ -21,10 +21,13 @@ export default class App extends Component<{}> {
     this._handlePressMood = this._handlePressMood.bind(this);
   }
 
+  // e is null if called explicitly e.g: this._handlePressMood(null, a_mood)
+  // however, this method will also be used as an event listener callback where we
+  // actually want to change the value of isPlaying
   _handlePressMood(e, mood){
     this.setState({
       mood: mood,
-      isPlaying: !this.state.isPlaying
+      isPlaying: e ? !this.state.isPlaying : this.state.isPlaying
     });
   }
 
