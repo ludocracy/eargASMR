@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   TouchableOpacity,
   Image
 } from 'react-native';
@@ -30,7 +29,6 @@ export default class SoundButton extends Component<{}> {
 
   }
 
-  // TODO check if mood is active; if not, set it to be active
   _onPress(e) {
     if(this.state.isPlaying) {
       let newSounds = this.props.mood.sounds
@@ -54,13 +52,12 @@ export default class SoundButton extends Component<{}> {
   }
 // TODO use this.props.sound.title and this.props.sound.iconUrl
   render() {
-    console.warn(typeof this.props.sound.iconUrl)
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
-        <Image
-          style={styles.soundIcon}
-          source={images[this.props.sound.iconKey]}
-        />
+          <Image
+            style={styles.soundIcon}
+            source={images[this.props.sound.iconKey]}
+          />
         </TouchableOpacity>
     );
   }
