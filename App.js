@@ -36,8 +36,15 @@ export default class App extends Component<{}> {
 
 
   render() {
+
     let titleText = this.state.isControl ? 'show sounds' : 'show controls';
-    let home = this.state.isControl ? <ControlPanel /> : <SoundBoard mood={this.state.mood} isPlaying={this.state.isPlaying}/>;
+    let home
+    if (this.state.mood === null){
+      home = <View />;
+    }else{
+      home = this.state.isControl ? <ControlPanel mood={this.state.mood}/> : <SoundBoard mood={this.state.mood} isPlaying={this.state.isPlaying}/>;
+    }
+
     return (
       <View style={{flex: 1, paddingTop: 20}}>
         <Header />

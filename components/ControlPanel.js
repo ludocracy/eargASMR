@@ -7,61 +7,50 @@ import {
   Dimensions,
   Image,
   Animated,
-  Slider
+  Slider,
+  TextInput
 } from 'react-native';
 import SoundControl from './SoundControl';
 import Timer from './Timer';
+import { database } from '../utils/firebase';
 
 
 export default class ControlPanel extends Component<{}> {
-  // constructor(props){
-  //   super(props);
-  //   this.time = 5;
-  //   this.state = {
-  //     seconds: 0,
-  //   };
-  //   // this.reset = this.reset.bind(this);
-  //   // this.start = this.start.bind(this);
-  //   // this.pause = this.pause.bind(this);
-  // }
-  //
-  // startTimer(e){
-  //   e.preventDefault();
-  //   this.interval = setInterval(() => {
-  //     this.setState({
-  //       seconds: this.state.seconds - 1,
-  //     });
-  //   }, 1000);
-  // }
-  //
-  // stopTimer(e){
-  //   e.preventDefault();
-  //   if(this.interval) {
-  //     clearInterval(this.interval)
-  //     this.interval = null;
-  //   } else {
-  //     this.start();
-  //   }
-  // }
-  //
-  // resetTimer(e){
-  //   e.preventDefault();
-  //   if(this.interval){
-  //     clearInterval(this.interval)
-  //     this.interval = null;
-  //   }
-  //   this.setState({
-  //     seconds: 0,
-  //   });
-  // }
+  constructor(props){
+    super(props);
+    this.state = {
+      title: this.props.mood.title,
+      isEditing: false
+    };
+    this.toggleTitleState = this.toggleTitleState.bind(this);
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+  }
+
+  toggleTitleState() {
+    this.setState({
+      isEditing: !this.state.isEditing
+    });
+  }
+
+  handleTitleChange(){
+    this.setState({
+      isEditing: !this.state.isEditing
+    });
+
+    database.ref(`moods/${this.props.mood.id}`).update({
+      title: this.state.title
+    });
+  }
 
   render() {
+    let titleComponent = this.state.isEditing
+      ? <TextInput style={styles.text} onBlur={this.handleTitleChange}
+          placeholder={this.state.title} onChange={e => this.setState({title: e.target.value})}/>
+      : <Text style={styles.text} onPress={this.toggleTitleState}>{this.state.title}</Text>;
+
     return (
-      <View style={{flex: 1, backgroundColor: '#DDBEA2'}}>
-        <Button
-        onPress ={() => {}}
-        title='Save Mood'
-        />
+      <View style={{flex: 10, backgroundColor: '#DDBEA2'}}>
+        {titleComponent}
         <Text>Master Volume</Text>
         <Slider />
         <Text>Sound 1</Text>
@@ -77,4 +66,8 @@ export default class ControlPanel extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    height: 20,
+    textAlign: 'center'
+  }
 });
