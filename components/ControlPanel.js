@@ -22,17 +22,18 @@ export default class ControlPanel extends Component<{}> {
       title: this.props.mood.title,
       isEditing: false
     };
-    this.toggleTitleState = this.toggleTitleState.bind(this);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this._toggleTitleState = this._toggleTitleState.bind(this);
+    this._handleTitleSubmit = this._handleTitleSubmit.bind(this);
+    this._handleTitleChange = this._handleTitleChange.bind(this);
   }
 
-  toggleTitleState() {
+  _toggleTitleState() {
     this.setState({
       isEditing: !this.state.isEditing
     });
   }
 
-  handleTitleChange(){
+  _handleTitleSubmit(){
     this.setState({
       isEditing: !this.state.isEditing
     });
@@ -42,11 +43,18 @@ export default class ControlPanel extends Component<{}> {
     });
   }
 
+  _handleTitleChange(title) {
+    this.setState({
+      title: title
+    });
+  }
+
   render() {
     let titleComponent = this.state.isEditing
-      ? <TextInput style={styles.text} onBlur={this.handleTitleChange}
-          placeholder={this.state.title} onChange={e => this.setState({title: e.target.value})}/>
-      : <Text style={styles.text} onPress={this.toggleTitleState}>{this.state.title}</Text>;
+
+      ? <TextInput style={styles.text} onBlur={this._handleTitleSubmit}
+          placeholder={this.state.title} onChangeText={this._handleTitleChange}/>
+      : <Text style={styles.text} onPress={this._toggleTitleState}>{this.state.title}</Text>;
 
     return (
       <View style={{flex: 10, backgroundColor: '#DDBEA2'}}>
