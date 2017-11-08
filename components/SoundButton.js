@@ -68,12 +68,12 @@ export default class SoundButton extends Component<{}> {
 
 const styles = StyleSheet.create({
   soundButton: {
-    height: 100,
+    height: 110,
     width: 100,
   },
   soundIcon: {
     width: 60,
-    height: 40,
+    height: 60,
   }
 
 });

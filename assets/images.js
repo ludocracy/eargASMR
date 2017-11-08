@@ -1,7 +1,6 @@
 
 
 const images = {
-	beach: require("./img/beach.png"),
 	bell: require("./img/bell.png"),
 	bird: require("./img/bird.png"),
 	fire: require("./img/bonfire.png"),
