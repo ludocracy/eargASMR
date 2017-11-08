@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
+  Button,
   TouchableOpacity,
   Image
 } from 'react-native';
@@ -21,7 +22,7 @@ export default class SoundButton extends Component<{}> {
   }
 
   componentWillMount() {
-    this.player = new Sound(this.props.sound.soundUrl, this._onError);
+    this.player = new Sound(this.props.sound.soundUrl);
   }
 
   // TODO handle errors on loading sound player
@@ -29,16 +30,21 @@ export default class SoundButton extends Component<{}> {
 
   }
 
+  // TODO check if mood is active; if not, set it to be active
   _onPress(e) {
+    this.player.play();
+    console.warn(this.state.isPlaying)
+    console.warn(this.props.mood.sounds)
     if(this.state.isPlaying) {
       let newSounds = this.props.mood.sounds
-        .filter(sound => sound.title !== this.props.sound.title);
+        .filter(sound => sound && sound.title !== this.props.sound.title);
       database.ref(`moods/${this.props.mood.id}`).set({
         sounds: newSounds
       });
 
       this.player.pause();
     } else {
+      console.warn(this.props.mood)
       database.ref(`moods/${this.props.mood.id}`).set({
         sounds: this.props.mood.sounds.concat(this.props.sound)
       });
@@ -54,10 +60,10 @@ export default class SoundButton extends Component<{}> {
   render() {
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
-          <Image
-            style={styles.soundIcon}
-            source={images[this.props.sound.iconKey]}
-          />
+        <Image
+          style={styles.soundIcon}
+          source={images[this.props.sound.iconKey]}
+        />
         </TouchableOpacity>
     );
   }
