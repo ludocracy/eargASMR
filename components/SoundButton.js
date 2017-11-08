@@ -61,7 +61,7 @@ export default class SoundButton extends Component<{}> {
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
         <Image
-          style={styles.soundIcon}
+          style={this.state.isPlaying ? styles.selected : styles.soundIcon}
           source={images[this.props.sound.iconKey]}
         />
         </TouchableOpacity>
@@ -71,12 +71,22 @@ export default class SoundButton extends Component<{}> {
 
 const styles = StyleSheet.create({
   soundButton: {
-    height: 110,
+    height: 100,
     width: 100,
+    alignItems: "center",
+    justifyContent: "center",
   },
   soundIcon: {
-    width: 60,
-    height: 60,
+    height: 80,
+    width: 80,
+  },
+  selected: {
+    borderRadius: 6,
+    borderWidth: 2,
+    borderColor: '#0092B4',
+    height: 100,
+    width: 100,
+    alignItems: "center",
+    justifyContent: "center",
   }
-
 });
