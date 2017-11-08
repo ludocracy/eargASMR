@@ -50,6 +50,8 @@ export default class SoundButton extends Component<{}> {
       });
 
       this.player.play();
+      this.player.setNumberOfLoops(-1);
+
     }
 
     this.setState ({
