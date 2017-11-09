@@ -84,12 +84,12 @@ const styles = StyleSheet.create({
   },
   selected: {
     borderRadius: 6,
-    borderWidth: 2,
-    borderColor: '#0092B4',
+    borderWidth: 3,
+    borderColor: '#62B6CB',
     height: 100,
     width: 100,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#FBFEF9"
+    backgroundColor: "#8CC9D9"
   }
 });

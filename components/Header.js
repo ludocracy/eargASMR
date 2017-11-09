@@ -25,20 +25,20 @@ export default class Header extends Component<{}> {
 
 const styles = StyleSheet.create({
   header: {
-    flex: 1.5,
+    flex: 2,
     backgroundColor: '#D33F49',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   title: {
-    fontFamily: 'Noteworthy-Bold',
+    fontFamily: 'HiraKakuProN-W3',
     fontSize: 30,
-    color: '#FBFEF9'
+    color: '#FBFEF9',
+    marginTop: 10
   },
   logo: {
     width: 50,
     height: 50,
-    marginTop: 10
   }
 });

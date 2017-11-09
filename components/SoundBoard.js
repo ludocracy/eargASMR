@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 10,
     flexWrap: 'wrap',
-    backgroundColor: '#80D3D8'
+    backgroundColor: '#263D42'
   }
 });

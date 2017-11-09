@@ -50,12 +50,14 @@ export default class App extends Component<{}> {
         <Header />
         <MoodBar _handlePressMood={this._handlePressMood} mood={this.state.mood}/>
         {home}
-        <Button title={titleText} onPress={() => this.setState({isControl:!this.state.isControl})}/>
+        <Button style={styles.showButton} title={titleText} onPress={() => this.setState({isControl:!this.state.isControl})}/>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-
+  showButton: {
+    color: 'red'
+  }
 });

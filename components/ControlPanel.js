@@ -57,16 +57,16 @@ export default class ControlPanel extends Component<{}> {
       : <Text style={styles.text} onPress={this._toggleTitleState}>{this.state.title}</Text>;
 
     return (
-      <View style={{flex: 10, backgroundColor: '#DDBEA2'}}>
+      <View style={{flex: 10, backgroundColor: '#FBFEF9'}}>
         {titleComponent}
         <Text>Master Volume</Text>
-        <Slider />
+        <Slider thumbImage={require('../assets/img/ear-sliders.png')} />
         <Text>Sound 1</Text>
-        <Slider />
+        <Slider thumbImage={require('../assets/img/ear-sliders.png')} />
         <Text>Sound 2</Text>
-        <Slider />
+        <Slider thumbImage={require('../assets/img/ear-sliders.png')} />
         <Text>Sound 3</Text>
-        <Slider />
+        <Slider thumbImage={require('../assets/img/ear-sliders.png')} />
 
       </View>
     );
