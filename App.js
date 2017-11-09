@@ -52,6 +52,8 @@ export default class App extends Component<{}> {
     });
   }
 
+  // loading moods here instead of moodbar so that they load more consistently
+  // and so we can track them with state
   componentDidMount() {
     this.ref = database.ref('moods');
     this.ref.on('value', snapshot => {
