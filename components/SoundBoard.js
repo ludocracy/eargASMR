@@ -8,19 +8,13 @@ import { database, firebaseListToArray} from '../utils/firebase';
 import jsonSoundData from '../sounds.json';
 
 export default class SoundBoard extends Component<{}> {
-  _isInMood(sound) {
-    if(this.props.mood.sounds) {
-      return this.props.mood.sounds.find(s => s.title === sound.title);
-    } else {
-      return false;
-    }
-  }
 
   render() {
     let soundButtons = jsonSoundData.sounds.map(soundData => {
       return (
-        <SoundButton key={soundData.title} isPlaying={this._isInMood(soundData)}
+        <SoundButton key={soundData.title}
           sound={soundData} mood={this.props.mood}
+          _setMoodState={this.props._setMoodState}
           player={this.props.players[soundData.title]} />
       );
     });

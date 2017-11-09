@@ -14,43 +14,75 @@ export default class SoundButton extends Component<{}> {
     super(props);
 
     this.state = {
-      isPlaying: this.props.player.isPlaying
+      isSelected: false
     }
 
+    this._addSoundToMood = this._addSoundToMood.bind(this);
+    this._removeSoundFromMood = this._removeSoundFromMood.bind(this);
     this._onPress = this._onPress.bind(this);
   }
 
-  _onPress(e) {
-    let soundArray = this.props.mood.sounds || [];
-    if(this.props.player.isPlaying) {
-      // filter this mood's sounds to not include the one we just pressed
-      let newSounds = soundArray
-        .filter(sound => sound && sound.title !== this.props.sound.title);
-      database.ref(`moods/${this.props.mood.id}`).update({
-        sounds: newSounds
-      }).then(() => {
-        this.setState({
-          isPlaying: false
-        });
-        this.props.player.pause();
+  componentDidMount(){
+    // grabbing reference to currently selected mood
+    // TODO test if this updates when a different mood is selected!
+    this.ref = database.ref(`moods/${this.props.mood.id}`);
+
+    // sets this sound button to be selected based on whether current mood includes it
+    this.ref.on(`value`, mood => {
+      this.setState({
+        isSelected: this._isInMood(mood.val())
       });
-    } else {
-      database.ref(`moods/${this.props.mood.id}`).update({
-        sounds: soundArray.concat(this.props.sound)
-      }).then(() => {
-        this.setState({
-          isPlaying: true
-        });
-        this.props.player.play();
-      });
+    });
+  }
+
+  // checks whether given mood includes this sound
+  _isInMood(mood) {
+    return mood.sounds && mood.sounds[this.props.sound.title];
+  }
+
+  _onPress() {
+    let player = this.props.player;
+    if(this.state.isSelected) { // sound is currently selected
+      // deselect sound, remove from DB and pause it
+      this._removeSoundFromMood();
+      player.pause();
+    } else { // sound is currently NOT selected
+      // select sound and add to DB
+      this._addSoundToMood();
+      // make whole mood play
+      this.props._setMoodState('play', this.props.sound);
     }
+  }
+
+  _addSoundToMood() {
+    let soundsObj = this.props.mood.sounds || {};
+    soundsObj[this.props.sound.title] = this.props.sound;
+    this.ref.update({
+      sounds: soundsObj
+    }).then(() => {
+      this.setState({
+        isSelected: true
+      });
+    });
+  }
+
+  _removeSoundFromMood() {
+    let soundsObj = this.props.mood.sounds || {};
+    delete soundsObj[this.props.sound.title];
+    this.ref.update({
+      sounds: soundsObj
+    }).then(() => {
+      this.setState({
+        isSelected: false
+      });
+    });
   }
 
   render() {
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
         <Image
-          style={this.state.isPlaying ? styles.selected : styles.soundIcon}
+          style={this.state.isSelected ? styles.selected : styles.unselected}
           source={images[this.props.sound.iconKey]}
         />
         </TouchableOpacity>
@@ -65,7 +97,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  soundIcon: {
+  unselected: {
     height: 80,
     width: 80,
   },

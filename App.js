@@ -24,9 +24,13 @@ export default class App extends Component<{}> {
 
     this.players = {};
 
+    this._setMoodState = this._setMoodState.bind(this);
     this._handlePressMood = this._handlePressMood.bind(this);
   }
 
+  // loading all sound players before app renders
+  // also wraps sound player in an object with our own play() and pause() functions
+  // and a boolean isPlaying because react-native-sound does not support isPlaying()
   componentWillMount() {
     jsonSoundData.sounds.forEach(sound => {
       let soundPlayer = new Sound(sound.soundUrl);
@@ -46,14 +50,36 @@ export default class App extends Component<{}> {
     });
   }
 
-  // e is null if called explicitly e.g: this._handlePressMood(null, a_mood)
-  // however, this method will also be used as an event listener callback where we
-  // actually want to change the value of isPlaying
-  _handlePressMood(e, mood = null){
+  // method is either 'play' or 'pause'
+  _setMoodState(method, sound = null) {
+    // TODO we may not need these!
+    if(this.state.mood === null) {
+      return null;
+    }
+    if(this.state.mood.sounds === undefined) {
+      this.state.mood.sounds = {};
+    }
+    if(sound) {
+      this.state.mood.sounds[sound.title] = sound;
+    }
+    // TODO the above may not be needed!
+    
+    for(let soundTitle in this.players) {
+      // only plays/pauses a sound if mood.sounds object includes given sound title
+      if(this.state.mood.sounds && this.state.mood.sounds[soundTitle]) {
+        // invokes either the play or pause method on the player
+        this.players[soundTitle][method]();
+      }
+    }
+  }
 
+  // user presses mood button, pausing/playing all sounds and selecting current mood
+  _handlePressMood(e, mood = null){
+    this._setMoodState(this.state.isPlaying ? 'pause' : 'play');
+
+    // TODO maybe wrap this in an if statement?
     this.setState({
       mood: mood || this.state.mood,
-      isPlaying: e ? !this.state.isPlaying : this.state.isPlaying
     });
   }
 
@@ -65,7 +91,8 @@ export default class App extends Component<{}> {
     }else{
       home = this.state.isControl
         ? <ControlPanel mood={this.state.mood} players={this.players}/>
-        : <SoundBoard mood={this.state.mood} players={this.players} />;
+        : <SoundBoard mood={this.state.mood}
+            _setMoodState={this._setMoodState} players={this.players} />;
     }
 
     return (

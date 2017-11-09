@@ -25,7 +25,7 @@ export default class MoodBar extends Component<{}> {
         let pushRef = this.ref.push();
         pushRef.set({
           title: 'name this mood',
-          sounds: [false]
+          sounds: {}
         });
       } else {
         this.props._handlePressMood(null, moodAry[0]);
