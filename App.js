@@ -21,7 +21,7 @@ export default class App extends Component<{}> {
       mood: null,
       moods: [],
       isControl: false,
-      isPlaying: true
+      isPlaying: false
     };
 
     this.players = {};
@@ -58,13 +58,15 @@ export default class App extends Component<{}> {
     this.ref = database.ref('moods');
     this.ref.on('value', snapshot => {
       let moodAry = firebaseListToArray(snapshot.val());
-      // creates an empty mood if one does not exist
+      // creates a set of empty moods if one does not exist
       if(moodAry.length === 0) {
-        let pushRef = this.ref.push();
-        pushRef.set({
-          title: 'name this mood',
-          sounds: {}
-        });
+        for(let i = 0; i < 3; i++) {
+          let pushRef = this.ref.push();
+          pushRef.set({
+            title: 'name this mood',
+            sounds: {}
+          });
+        }
       } else {
         this.setState({
           moods: moodAry,
@@ -94,6 +96,9 @@ export default class App extends Component<{}> {
         this.players[soundTitle][method]();
       }
     }
+    this.setState({
+      isPlaying: !this.state.isPlaying
+    })
   }
 
   // user presses mood button, pausing/playing all sounds and selecting current mood

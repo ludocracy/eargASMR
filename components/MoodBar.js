@@ -11,7 +11,7 @@ export default class MoodBar extends Component<{}> {
     let moodButtons = this.props.moods.map(moodObject => {
       return(
         <MoodButton
-        isPlaying={this.props.mood && this.props.mood.id === moodObject.id}
+        isSelected={this.props.mood && this.props.mood.id === moodObject.id}
         key={moodObject.id}
         _handlePressMood={this.props._handlePressMood}
         mood={moodObject}

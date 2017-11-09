@@ -8,15 +8,15 @@ import {
 
 export default class MoodBar extends Component<{}> {
   render() {
-    let styling = this.props.isPlaying
+    let styling = this.props.isSelected
       ? styles.selectedMoodButton
       : styles.unselectedMoodButton;
 
     return (
-      <TouchableOpacity style={styling}>
+      <TouchableOpacity style={styling}
+        onPress={(e) => this.props._handlePressMood(e, this.props.mood)}>
         <Image
           style={{height: 100, width: 100}}
-          onPress = {(e) => this.props.handlePressMood(e, this.props.mood)}
           source={require('../assets/img/add-mood.png')}
         />
       </TouchableOpacity>
@@ -26,6 +26,7 @@ export default class MoodBar extends Component<{}> {
 
 const styles = StyleSheet.create({
   selectedMoodButton: {
+    backgroundColor: 'white',
     height: 100,
     width: 100,
     marginRight: 10,
