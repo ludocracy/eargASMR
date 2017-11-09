@@ -14,47 +14,34 @@ export default class SoundButton extends Component<{}> {
     super(props);
 
     this.state = {
-      isPlaying: this.props.isPlaying
+      isPlaying: this.props.player.isPlaying
     }
+
     this._onPress = this._onPress.bind(this);
   }
 
-  isPlaying() {
-  	return new Promise((resolve, reject) => {
-  		this.props.player.getCurrentTime((seconds, isPlaying) => {
-  			resolve(isPlaying);
-  		});
-  	});
-  }
-
   _onPress(e) {
-    if(this.isPlaying() && this.props.mood.sounds) {
-      let newSounds = this.props.mood.sounds
+    let soundArray = this.props.mood.sounds || [];
+    if(this.props.player.isPlaying) {
+      // filter this mood's sounds to not include the one we just pressed
+      let newSounds = soundArray
         .filter(sound => sound && sound.title !== this.props.sound.title);
       database.ref(`moods/${this.props.mood.id}`).update({
         sounds: newSounds
-      });
-
-      this.props.player.pause();
-
-      this.setState({
-        isPlaying: false
+      }).then(() => {
+        this.setState({
+          isPlaying: false
+        });
+        this.props.player.pause();
       });
     } else {
-      let soundArray = this.props.mood.sounds;
-      if (soundArray === undefined) {
-        soundArray = []
-      }
       database.ref(`moods/${this.props.mood.id}`).update({
         sounds: soundArray.concat(this.props.sound)
-      });
-
-
-      this.props.player.play();
-      this.props.player.setNumberOfLoops(-1);
-
-      this.setState({
-        isPlaying: true
+      }).then(() => {
+        this.setState({
+          isPlaying: true
+        });
+        this.props.player.play();
       });
     }
   }

@@ -29,7 +29,20 @@ export default class App extends Component<{}> {
 
   componentWillMount() {
     jsonSoundData.sounds.forEach(sound => {
-      this.players[sound.title] = new Sound(sound.soundUrl);
+      let soundPlayer = new Sound(sound.soundUrl);
+      soundPlayer.setNumberOfLoops(-1);
+      this.players[sound.title] = {
+        player: soundPlayer,
+        isPlaying: false,
+        play: function() {
+          this.isPlaying = true;
+          soundPlayer.play();
+        },
+        pause: function() {
+          this.isPlaying = false;
+          soundPlayer.pause();
+        }
+      };
     });
   }
 
@@ -37,17 +50,6 @@ export default class App extends Component<{}> {
   // however, this method will also be used as an event listener callback where we
   // actually want to change the value of isPlaying
   _handlePressMood(e, mood = null){
-    // if(mood.sounds) {
-    //   for(let key in this.state.players) {
-    //     if(mood.sounds.find(s => s.title === key)) {
-    //       if(this.state.isPlaying) {
-    //         this.state.players[key].pause();
-    //       } else {
-    //         this.state.players[key].play();
-    //       }
-    //     }
-    //   }
-    // }
 
     this.setState({
       mood: mood || this.state.mood,
