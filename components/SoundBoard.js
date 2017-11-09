@@ -9,14 +9,19 @@ import jsonSoundData from '../sounds.json';
 
 export default class SoundBoard extends Component<{}> {
   _isInMood(sound) {
-    return this.props.mood.sounds.find(s => s.title === sound.title) !== undefined;
+    if(this.props.mood.sounds) {
+      return this.props.mood.sounds.find(s => s.title === sound.title);
+    } else {
+      return false;
+    }
   }
 
   render() {
     let soundButtons = jsonSoundData.sounds.map(soundData => {
-      let isPlaying = this.props.isPlaying ? this._isInMood(soundData) : false;
       return (
-        <SoundButton key={soundData.title} isPlaying={isPlaying} sound={soundData} mood={this.props.mood} />
+        <SoundButton key={soundData.title} isPlaying={this._isInMood(soundData)}
+          sound={soundData} mood={this.props.mood}
+          player={this.props.players[soundData.title]} />
       );
     });
     return (
@@ -28,11 +33,6 @@ export default class SoundBoard extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    width: 50,
-    height: 50,
-    backgroundColor: 'red'
-  },
   soundBoard: {
     justifyContent: 'space-around',
     alignContent: 'space-around',

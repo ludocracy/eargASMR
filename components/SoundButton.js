@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import Sound from 'react-native-sound';
 import { database } from '../utils/firebase';
 import images from '@assets/images';
 
@@ -15,50 +14,38 @@ export default class SoundButton extends Component<{}> {
     super(props);
 
     this.state = {
-      isPlaying: this.props.isPlaying
-    };
+      isPlaying: this.props.player.isPlaying
+    }
 
     this._onPress = this._onPress.bind(this);
   }
 
-  componentWillMount() {
-    this.player = new Sound(this.props.sound.soundUrl);
-  }
-
-  // TODO handle errors on loading sound player
-  _onError() {
-
-  }
-
-  // TODO check if mood is active; if not, set it to be active
   _onPress(e) {
-    if(this.state.isPlaying) {
-      let newSounds = this.props.mood.sounds
+    let soundArray = this.props.mood.sounds || [];
+    if(this.props.player.isPlaying) {
+      // filter this mood's sounds to not include the one we just pressed
+      let newSounds = soundArray
         .filter(sound => sound && sound.title !== this.props.sound.title);
-      database.ref(`moods/${this.props.mood.id}`).set({
+      database.ref(`moods/${this.props.mood.id}`).update({
         sounds: newSounds
+      }).then(() => {
+        this.setState({
+          isPlaying: false
+        });
+        this.props.player.pause();
       });
-
-      this.player.pause();
     } else {
-      let soundArray = this.props.mood.sounds;
-      if (soundArray === undefined) {
-        soundArray = []
-      }
-      database.ref(`moods/${this.props.mood.id}`).set({
+      database.ref(`moods/${this.props.mood.id}`).update({
         sounds: soundArray.concat(this.props.sound)
+      }).then(() => {
+        this.setState({
+          isPlaying: true
+        });
+        this.props.player.play();
       });
-
-      this.player.play();
-      this.player.setNumberOfLoops(-1);
-
     }
-
-    this.setState ({
-      isPlaying: !this.state.isPlaying
-    });
   }
-// TODO use this.props.sound.title and this.props.sound.iconUrl
+
   render() {
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
