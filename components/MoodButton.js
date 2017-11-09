@@ -3,7 +3,8 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  Image
+  Image,
+  Text
 } from 'react-native';
 
 export default class MoodBar extends Component<{}> {
@@ -19,6 +20,7 @@ export default class MoodBar extends Component<{}> {
           style={{height: 100, width: 100}}
           source={require('../assets/img/add-mood.png')}
         />
+        <Text>{this.props.mood.title}</Text>
       </TouchableOpacity>
     );
   }
