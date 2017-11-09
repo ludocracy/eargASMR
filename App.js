@@ -87,10 +87,6 @@ export default class App extends Component<{}> {
     if(sound) {
       this.state.mood.sounds[sound.title] = sound;
     }
-<<<<<<< HEAD
-=======
-    // TODO the above may not be needed!
->>>>>>> 66beee8a2a5cb10203ef79090696f963d7562349
 
     for(let soundTitle in this.players) {
       // only plays/pauses a sound if mood.sounds object includes given sound title

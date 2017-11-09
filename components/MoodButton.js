@@ -9,7 +9,7 @@ import {
 
 export default class MoodBar extends Component<{}> {
   render() {
-    let styling = this.props.isPlaying
+    let styling = this.props.isSelected
       ? styles.selectedMoodButton
       : styles.unselectedMoodButton;
 
@@ -19,6 +19,7 @@ export default class MoodBar extends Component<{}> {
           style={{height: 100, width: 100}}
           source={require('../assets/img/headphones.png')}
         />
+        <Text>{this.props.mood.title}</Text>
       </TouchableOpacity>
     );
   }
