@@ -3,7 +3,8 @@ import {
   StyleSheet,
   View,
   Text,
-  Button
+  Button,
+  TouchableOpacity
 } from 'react-native';
 import Header from './components/Header';
 import MoodBar from './components/MoodBar';
@@ -63,7 +64,7 @@ export default class App extends Component<{}> {
       this.state.mood.sounds[sound.title] = sound;
     }
     // TODO the above may not be needed!
-    
+
     for(let soundTitle in this.players) {
       // only plays/pauses a sound if mood.sounds object includes given sound title
       if(this.state.mood.sounds && this.state.mood.sounds[soundTitle]) {
@@ -84,7 +85,7 @@ export default class App extends Component<{}> {
   }
 
   render() {
-    let titleText = this.state.isControl ? 'show sounds' : 'show controls';
+    let titleText = this.state.isControl ? 'Show Sounds' : 'Show Controls';
     let home
     if (this.state.mood === null){
       home = <View />;
@@ -96,11 +97,15 @@ export default class App extends Component<{}> {
     }
 
     return (
-      <View style={{flex: 1, paddingTop: 20}}>
+      <View style={{flex: 1, paddingTop: 20, backgroundColor: '#263D42'}}>
         <Header />
         <MoodBar _handlePressMood={this._handlePressMood} mood={this.state.mood}/>
         {home}
-        <Button style={styles.showButton} title={titleText} onPress={() => this.setState({isControl:!this.state.isControl})}/>
+        <TouchableOpacity style={styles.showButton} title={titleText} onPress={() => this.setState({isControl:!this.state.isControl})}>
+          <Text style={styles.panelText}>
+            {titleText}
+          </Text>
+      </TouchableOpacity>
       </View>
     );
   }
@@ -108,6 +113,17 @@ export default class App extends Component<{}> {
 
 const styles = StyleSheet.create({
   showButton: {
-    color: 'red'
+    flex: 1,
+    backgroundColor: '#D33F49',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 40,
+    marginLeft: 90,
+    marginRight: 90
+  },
+  panelText: {
+    fontFamily: 'Helvetica',
+    fontSize: 20,
+    color: '#FBFEF9'
   }
 });

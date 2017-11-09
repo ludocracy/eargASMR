@@ -68,7 +68,9 @@ export default class ControlPanel extends Component<{}> {
 
 const styles = StyleSheet.create({
   text: {
-    height: 20,
-    textAlign: 'center'
+    fontSize: 33,
+    textAlign: 'center',
+    fontFamily: 'HiraKakuProN-W3',
+    paddingTop: 20
   }
 });
