@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   Text,
-  Dimensions,
-  Image,
-  Animated,
-  Slider,
   TextInput
 } from 'react-native';
 import SoundControl from './SoundControl';
@@ -51,23 +46,21 @@ export default class ControlPanel extends Component<{}> {
 
   render() {
     let titleComponent = this.state.isEditing
-
       ? <TextInput style={styles.text} onBlur={this._handleTitleSubmit}
           placeholder={this.state.title} onChangeText={this._handleTitleChange}/>
       : <Text style={styles.text} onPress={this._toggleTitleState}>{this.state.title}</Text>;
 
+    let soundControls = [];
+    for(let key in this.props.players) {
+      let player = this.props.players[key];
+      if(player.isPlaying) {
+        soundControls.push(<SoundControl player={player} title={key} key={key}/>);
+      }
+    }
     return (
       <View style={{flex: 10, backgroundColor: '#DDBEA2'}}>
         {titleComponent}
-        <Text>Master Volume</Text>
-        <Slider />
-        <Text>Sound 1</Text>
-        <Slider />
-        <Text>Sound 2</Text>
-        <Slider />
-        <Text>Sound 3</Text>
-        <Slider />
-
+        {soundControls}
       </View>
     );
   }
