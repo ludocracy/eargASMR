@@ -11,6 +11,7 @@ import SoundBoard from './components/SoundBoard';
 import ControlPanel from './components/ControlPanel';
 import jsonSoundData from './sounds.json';
 import Sound from 'react-native-sound';
+import { database, firebaseListToArray } from './utils/firebase';
 
 export default class App extends Component<{}> {
   constructor(props){
@@ -18,6 +19,7 @@ export default class App extends Component<{}> {
 
     this.state = {
       mood: null,
+      moods: [],
       isControl: false,
       isPlaying: true
     };
@@ -50,20 +52,39 @@ export default class App extends Component<{}> {
     });
   }
 
+  componentDidMount() {
+    this.ref = database.ref('moods');
+    this.ref.on('value', snapshot => {
+      let moodAry = firebaseListToArray(snapshot.val());
+      // creates an empty mood if one does not exist
+      if(moodAry.length === 0) {
+        let pushRef = this.ref.push();
+        pushRef.set({
+          title: 'name this mood',
+          sounds: {}
+        });
+      } else {
+        this.setState({
+          moods: moodAry,
+          mood: moodAry[0]
+        });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.ref.off();
+  }
+
   // method is either 'play' or 'pause'
   _setMoodState(method, sound = null) {
-    // TODO we may not need these!
-    if(this.state.mood === null) {
-      return null;
-    }
     if(this.state.mood.sounds === undefined) {
       this.state.mood.sounds = {};
     }
     if(sound) {
       this.state.mood.sounds[sound.title] = sound;
     }
-    // TODO the above may not be needed!
-    
+
     for(let soundTitle in this.players) {
       // only plays/pauses a sound if mood.sounds object includes given sound title
       if(this.state.mood.sounds && this.state.mood.sounds[soundTitle]) {
@@ -98,7 +119,8 @@ export default class App extends Component<{}> {
     return (
       <View style={{flex: 1, paddingTop: 20}}>
         <Header />
-        <MoodBar _handlePressMood={this._handlePressMood} mood={this.state.mood}/>
+        <MoodBar _handlePressMood={this._handlePressMood}
+          mood={this.state.mood} moods={this.state.moods}/>
         {home}
         <Button style={styles.showButton} title={titleText} onPress={() => this.setState({isControl:!this.state.isControl})}/>
       </View>

@@ -48,11 +48,13 @@ export default class SoundButton extends Component<{}> {
     if(this.state.isSelected) { // sound is currently selected
       // deselect sound, remove from DB and pause it
       this._removeSoundFromMood();
+      console.warn('pausing')
       player.pause();
     } else { // sound is currently NOT selected
       // select sound and add to DB
       this._addSoundToMood();
       // make whole mood play
+      console.warn('playing')
       this.props._setMoodState('play', this.props.sound);
     }
   }
