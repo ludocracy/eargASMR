@@ -26,7 +26,6 @@ export default class MoodBar extends Component<{}> {
 
 const styles = StyleSheet.create({
   selectedMoodButton: {
-    backgroundColor: 'green',
     height: 100,
     width: 100,
     marginRight: 10,

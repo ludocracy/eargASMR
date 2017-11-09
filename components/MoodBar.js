@@ -29,7 +29,7 @@ export default class MoodBar extends Component<{}> {
         });
       } else {
         this.props._handlePressMood(null, moodAry[0]);
-        
+
         this.setState({
           moods: moodAry
         });
@@ -54,7 +54,7 @@ export default class MoodBar extends Component<{}> {
     });
 
     return (
-      <ScrollView horizontal={true}>
+      <ScrollView horizontal={true} style={styles.moodBarScroll}>
         <View style={styles.moodBar}>
           {moodButtons}
         </View>
@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'space-around',
     flexDirection: 'row',
-    backgroundColor: 'white',
   },
+  moodBarScroll: {
+    backgroundColor: '#D33F49'
+  }
 });

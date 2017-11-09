@@ -9,10 +9,11 @@ import {
 export default class Header extends Component<{}> {
   render() {
     return (
-      <View style={{flex: 1, backgroundColor: '#DDBEA2', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+      <View style={styles.header}>
         <Image source={{uri: 'https://d30y9cdsu7xlg0.cloudfront.net/png/105498-200.png'}}
           style={{width: 40, height: 40}} />
-        <Text style={{ fontFamily: 'HelveticaNeue-CondensedBold', fontSize: 30 }}>
+        <Text style={styles.title}>
+          <Image source={require('../assets/img/ear.png')} style={styles.logo} />
           eargASMR
         </Text>
         <Image source={{uri: 'https://www.shareicon.net/data/2015/09/12/99907_add_512x512.png'}}
@@ -23,4 +24,21 @@ export default class Header extends Component<{}> {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    flex: 1.5,
+    backgroundColor: '#D33F49',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  title: {
+    fontFamily: 'Noteworthy-Bold',
+    fontSize: 30,
+    color: '#FBFEF9'
+  },
+  logo: {
+    width: 50,
+    height: 50,
+    marginTop: 10
+  }
 });
