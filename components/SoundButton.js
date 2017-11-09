@@ -24,7 +24,6 @@ export default class SoundButton extends Component<{}> {
 
   componentDidMount(){
     // grabbing reference to currently selected mood
-    // TODO test if this updates when a different mood is selected!
     this.ref = database.ref(`moods/${this.props.mood.id}`);
 
     // sets this sound button to be selected based on whether current mood includes it
@@ -33,6 +32,10 @@ export default class SoundButton extends Component<{}> {
         isSelected: this._isInMood(mood.val())
       });
     });
+  }
+
+  componentWillUnmount() {
+    this.ref.off();
   }
 
   // checks whether given mood includes this sound

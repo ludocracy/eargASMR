@@ -9,7 +9,7 @@ import {
 
 export default class MoodBar extends Component<{}> {
   render() {
-    let styling = this.props.isPlaying
+    let styling = this.props.isSelected
       ? styles.selectedMoodButton
       : styles.unselectedMoodButton;
 
