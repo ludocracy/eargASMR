@@ -15,10 +15,13 @@ export default class MoodBar extends Component<{}> {
 
     return (
       <TouchableOpacity style={styling} onPress = {(e) => this.props._handlePressMood(e, this.props.mood)}>
-        <Image
-          style={{height: 100, width: 100}}
-          source={require('../assets/img/headphones.png')}
-        />
+        <View style={styles.moodContainer}>
+          <Image
+            style={{height: 100, width: 100}}
+            source={require('../assets/img/headphones.png')}
+          />
+          <Text style={styles.moodNames}>{this.props.mood.title}</Text>
+        </View>
       </TouchableOpacity>
     );
   }
@@ -40,5 +43,12 @@ const styles = StyleSheet.create({
     width: 100,
     marginRight: 10,
     marginLeft: 10,
+  },
+  moodContainer: {
+    alignItems: 'center'
+  },
+  moodNames: {
+    fontFamily: 'HiraKakuProN-W3',
+    color: '#FBFEF9'
   }
 });
