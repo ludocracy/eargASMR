@@ -16,13 +16,12 @@ export default class SoundBoard extends Component<{}> {
     }
   }
 
-
   render() {
     let soundButtons = jsonSoundData.sounds.map(soundData => {
-      let isPlaying = this.props.isMoodPlaying ? this._isInMood(soundData) : false;
       return (
-        <SoundButton key={soundData.title} isPlaying={isPlaying} sound={soundData} mood={this.props.mood}
-        />
+        <SoundButton key={soundData.title} isPlaying={this._isInMood(soundData)}
+          sound={soundData} mood={this.props.mood}
+          player={this.props.players[soundData.title]} />
       );
     });
     return (

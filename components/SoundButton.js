@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   Image
 } from 'react-native';
-import Sound from 'react-native-sound';
 import { database } from '../utils/firebase';
 import images from '@assets/images';
 
@@ -16,32 +15,32 @@ export default class SoundButton extends Component<{}> {
 
     this.state = {
       isPlaying: this.props.isPlaying
-    };
-
+    }
     this._onPress = this._onPress.bind(this);
   }
 
-  componentWillMount() {
-    this.player = new Sound(this.props.sound.soundUrl);
-  }
-
-  // TODO handle errors on loading sound player
-  _onError() {
-
+  isPlaying() {
+  	return new Promise((resolve, reject) => {
+  		this.props.player.getCurrentTime((seconds, isPlaying) => {
+  			resolve(isPlaying);
+  		});
+  	});
   }
 
   _onPress(e) {
-    if(this.state.isPlaying) {
-      console.warn(`sound ${this.props.sound.title} is playing; now pausing!`);
+    if(this.isPlaying() && this.props.mood.sounds) {
       let newSounds = this.props.mood.sounds
         .filter(sound => sound && sound.title !== this.props.sound.title);
       database.ref(`moods/${this.props.mood.id}`).update({
         sounds: newSounds
       });
 
-      this.player.pause();
+      this.props.player.pause();
+
+      this.setState({
+        isPlaying: false
+      });
     } else {
-      console.warn(`sound ${this.props.sound.title} is paused; now playing!`);
       let soundArray = this.props.mood.sounds;
       if (soundArray === undefined) {
         soundArray = []
@@ -51,16 +50,15 @@ export default class SoundButton extends Component<{}> {
       });
 
 
-      this.player.play();
-      this.player.setNumberOfLoops(-1);
+      this.props.player.play();
+      this.props.player.setNumberOfLoops(-1);
 
+      this.setState({
+        isPlaying: true
+      });
     }
-
-    this.setState ({
-      isPlaying: !this.state.isPlaying
-    });
   }
-// TODO use this.props.sound.title and this.props.sound.iconUrl
+
   render() {
     return (
         <TouchableOpacity style={styles.soundButton} onPress={this._onPress}>
