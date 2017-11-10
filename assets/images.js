@@ -10,6 +10,9 @@ const images = {
 	night: require("./img/night.png"),
 	waves: require("./img/waves.png"),
 	rain: require("./img/wind-rain.png"),
+	whales: require("./img/whales.png"),
+	bacon: require("./img/bacon.png"),
+	wine: require("./img/winess.png"),
 };
 
 

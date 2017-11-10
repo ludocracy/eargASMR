@@ -22,7 +22,7 @@
     },
     {
       "title": "Bells",
-      "soundUrl": "https://freesound.org//data/previews/365/365416_179538-lq.mp3",
+      "soundUrl": "https://freesound.org/data/previews/365/365416_179538-lq.mp3",
       "iconKey": "bell"
     },
     {
@@ -37,13 +37,28 @@
     },
     {
       "title": "Leaves",
-      "soundUrl": "https://freesound.org//data/previews/330/330647_3163726-lq.mp3",
+      "soundUrl": "https://freesound.org/data/previews/330/330647_3163726-lq.mp3",
       "iconKey": "leaves"
     },
     {
       "title": "Night Time",
-      "soundUrl": "https://freesound.org//data/previews/62/62488_43834-lq.mp3",
+      "soundUrl": "https://freesound.org/data/previews/62/62488_43834-lq.mp3",
       "iconKey": "night"
+    },
+    {
+      "title": "Whales",
+      "soundUrl": "https://freesound.org/data/previews/324/324386_5478900-lq.mp3",
+      "iconKey": "whales"
+    },
+    {
+      "title": "Bacon",
+      "soundUrl": "https://freesound.org/data/previews/214/214466_2444153-lq.mp3",
+      "iconKey": "bacon"
+    },
+    {
+      "title": "Pouring Wine",
+      "soundUrl": "https://freesound.org/data/previews/220/220303_2962342-lq.mp3",
+      "iconKey": "wine"
     },
   ]
 }
