@@ -21,5 +21,8 @@
 	},
 	"jest": {
 		"preset": "react-native"
-	}
+	},
+	"resolutions": {
+  "react-native/metro-bundler": "0.20.0"
+}
 }
