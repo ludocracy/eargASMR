@@ -14,7 +14,7 @@
 ## UX collaboration
 We worked with a UX team to wireframe our concept and create a user persona and empathy map.
 
-*screenshots*
+![wireframe-screenshot](https://i.imgur.com/GHT3fw5.png)
 
 ## Future development
 - User login to save sets of sounds or "moods"
