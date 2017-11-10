@@ -122,8 +122,6 @@ export default class App extends Component<{}> {
     return (
       <View style={{flex: 1, paddingTop: 20, backgroundColor: '#263D42'}}>
         <Header />
-        <MoodBar _handlePressMood={this._handlePressMood}
-          mood={this.state.mood} moods={this.state.moods}/>
         {home}
         <TouchableOpacity style={styles.showButton} title={titleText} onPress={() => this.setState({isControl:!this.state.isControl})}>
           <Text style={styles.panelText}>
