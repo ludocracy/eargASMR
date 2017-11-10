@@ -7,6 +7,9 @@
 - Adjust their volumes individually to create the ideal balance
 - Minimal interface so you can get right into a session without stressful hoops to jump through
 
+![app-screenshot](https://i.imgur.com/4KByEZb.png)
+![app-screenshot](https://i.imgur.com/LS8AHbA.png)
+
 ## Technologies used
 - React-native - allows development in React and deployment to iOS/Android
 - React-native-sound - an open-source audio player for React-native
