@@ -4,7 +4,8 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image
+  Image,
+  Text
 } from 'react-native';
 import { database } from '../utils/firebase';
 import images from '@assets/images';
@@ -88,6 +89,7 @@ export default class SoundButton extends Component<{}> {
           style={this.state.isSelected ? styles.selected : styles.unselected}
           source={images[this.props.sound.iconKey]}
         />
+        <Text style={styles.iconTitles}>{this.props.sound.title}</Text>
         </TouchableOpacity>
     );
   }
@@ -113,5 +115,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#8CC9D9"
+  },
+  iconTitles: {
+    color: '#FBFEF9',
+    fontWeight: 'bold'
   }
 });

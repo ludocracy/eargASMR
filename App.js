@@ -63,7 +63,7 @@ export default class App extends Component<{}> {
       if(moodAry.length === 0) {
         let pushRef = this.ref.push();
         pushRef.set({
-          title: 'name this mood',
+          title: 'Volume Control',
           sounds: {}
         });
       } else {

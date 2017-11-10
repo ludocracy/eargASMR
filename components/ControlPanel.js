@@ -3,7 +3,8 @@ import {
   StyleSheet,
   View,
   Text,
-  TextInput
+  TextInput,
+  ScrollView
 } from 'react-native';
 import SoundControl from './SoundControl';
 import Timer from './Timer';
@@ -58,9 +59,11 @@ export default class ControlPanel extends Component<{}> {
       }
     }
     return (
-      <View style={{flex: 10, backgroundColor: '#FBFEF9'}}>
-        {titleComponent}
-        {soundControls}
+      <View style={styles.panelContainer}>
+        <Text style={styles.text}>Volume Control</Text>
+        <ScrollView>
+          {soundControls}
+        </ScrollView>
       </View>
     );
   }
@@ -72,5 +75,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'HiraKakuProN-W3',
     paddingTop: 20
+  },
+  panelContainer: {
+    flex: 10,
+    backgroundColor: '#FBFEF9',
+    paddingLeft: 20,
+    paddingRight: 20
   }
 });
