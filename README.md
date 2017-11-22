@@ -1,4 +1,7 @@
 # eargASMR
+## Our Team
+This project was a collaboration between Dazaev Vives Cervantes, Andrew Chavez and Peter Kong. Due to hardware constraints, all code commits were done from Dazaev and Andrew's computers, but major contributions were made by all team members.
+
 ## Customize your ASMR/meditation session
 [ASMR](https://en.wikipedia.org/wiki/Autonomous_sensory_meridian_response) is growing rapidly in popularity. Currently users almost exclusively use YouTube and ASMRtists accrue millions of views for their soothing sound effects. Our app allows users to create their own ASMR sessions with sounds of their choosing.
 
